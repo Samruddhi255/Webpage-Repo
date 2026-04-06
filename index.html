@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS Validation Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 250px;
+        }
+        .strength {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Email Validation</h2>
+    <input type="text" id="email" placeholder="Enter email">
+    <button onclick="validateEmail()">Validate</button>
+    <p id="emailResult"></p>
+
+    <h2>Password Strength Checker</h2>
+    <input type="password" id="password" placeholder="Enter password" onkeyup="checkStrength()">
+    <p id="strengthResult" class="strength"></p>
+
+    <h2>Cookies & Session</h2>
+    <button onclick="setCookie()">Set Cookie</button>
+    <button onclick="getCookie()">Get Cookie</button>
+    <button onclick="setSession()">Set Session</button>
+    <button onclick="getSession()">Get Session</button>
+    <p id="storageResult"></p>
+
+<script>
+    // Email Validation
+    function validateEmail() {
+        let email = document.getElementById("email").value;
+        let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if (email.match(pattern)) {
+            document.getElementById("emailResult").innerText = "Valid Email ✅";
+        } else {
+            document.getElementById("emailResult").innerText = "Invalid Email ❌";
+        }
+    }
+
+    // Password Strength Checker
+    function checkStrength() {
+        let password = document.getElementById("password").value;
+        let strength = "";
+
+        if (password.length < 6) {
+            strength = "Weak ❌";
+        } else if (password.match(/[A-Z]/) && password.match(/[0-9]/)) {
+            strength = "Strong 💪";
+        } else {
+            strength = "Medium ⚠️";
+        }
+
+        document.getElementById("strengthResult").innerText = strength;
+    }
+
+    // Cookie Functions
+    function setCookie() {
+        document.cookie = "username=SAMM; expires=Fri, 31 Dec 2026 12:00:00 UTC;";
+        alert("Cookie Set!");
+    }
+
+    function getCookie() {
+        document.getElementById("storageResult").innerText = "Cookies: " + document.cookie;
+    }
+
+    // Session Storage
+    function setSession() {
+        sessionStorage.setItem("sessionUser", "SAMM");
+        alert("Session Stored!");
+    }
+
+    function getSession() {
+        let data = sessionStorage.getItem("sessionUser");
+        document.getElementById("storageResult").innerText = "Session: " + data;
+    }
+</script>
+
+</body>
+</html>
